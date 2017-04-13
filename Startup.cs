@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using Proverb.Api.Core.EntityFramework;
 
 namespace Proverb.Api.Core
 {
@@ -19,6 +17,12 @@ namespace Proverb.Api.Core
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
+
+            if (env.IsDevelopment())
+            {
+                builder.AddUserSecrets<Startup>();
+            }
+            
             Configuration = builder.Build();
         }
 
@@ -29,6 +33,10 @@ namespace Proverb.Api.Core
         {
             // Add framework services.
             services.AddMvc();
+
+            var connectionString = Configuration["SecretConnectionString"] ?? Configuration.GetConnectionString("ProverbConnection");
+
+            services.AddDbContext<ProverbContext>(options => options.UseSqlServer(connectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,25 +1,23 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace Proverb.Api.Core.EntityFramework.Models
 {
-    public class User
+    public partial class User
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public User()
+        {
+            Saying = new HashSet<Saying>();
+        }
+
         public int Id { get; set; }
-
-        [Required]
         public string Name { get; set; }
-
-        [Required]
-        [StringLength(30, MinimumLength = 3)]
         public string UserName { get; set; }
-
-        [EmailAddress]
         public string Email { get; set; }
-
+        public string Discriminator { get; set; }
         public DateTime? DateOfBirth { get; set; }
+        public int? Sagacity { get; set; }
+
+        public virtual ICollection<Saying> Saying { get; set; }
     }
 }
