@@ -13,7 +13,7 @@ namespace Proverb.Api.Core
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
-                .SetBasePath(System.IO.Path.Combine(env.ContentRootPath, "src/ProverbApi/"))
+                .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();

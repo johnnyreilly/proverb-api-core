@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 
 namespace Proverb.Api.Core.Helpers
 {
@@ -29,16 +28,9 @@ namespace Proverb.Api.Core.Helpers
             return new ValidationMessages(errors);
         }
 
-        public static string CamelCasePropNames(string propName)
-        {
-            var array = propName.Split('.');
-            var camelCaseList = new string[array.Length];
-            for (var i = 0; i < array.Length; i++)
-            {
-                var prop = array[i];
-                camelCaseList[i] = prop.Substring(0, 1).ToLower() + prop.Substring(1, prop.Length - 1);
-            }
-            return string.Join(".", camelCaseList);
-        }
+        public static string CamelCasePropNames(string propName) =>
+            string.Join(".", 
+                propName.Split('.').Select(prop => prop.Substring(0, 1).ToLower() + prop.Substring(1, prop.Length - 1))
+            );
     }
 }
