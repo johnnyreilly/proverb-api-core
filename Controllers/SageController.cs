@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Proverb.Api.Core.EntityFramework;
 using Proverb.Api.Core.EntityFramework.Models;
+using Proverb.Api.Core.Helpers;
 
 namespace Proverb.Api.Core.Controllers
 {
@@ -42,7 +43,7 @@ namespace Proverb.Api.Core.Controllers
         {
             if (!ModelState.IsValid) 
             {
-                return BadRequest("problems"/*ModelState.ToValidationMessages()*/);
+                return BadRequest(ModelState.ToValidationMessages());
             }
 
             // await _sageService.UpdateAsync(sage);
