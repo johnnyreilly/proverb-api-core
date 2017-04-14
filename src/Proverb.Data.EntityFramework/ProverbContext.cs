@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Proverb.Api.Core.EntityFramework.Models;
+using Proverb.Data.EntityFramework.Models;
 
-namespace Proverb.Api.Core.EntityFramework
+namespace Proverb.Data.EntityFramework
 {
     public partial class ProverbContext : DbContext
     {

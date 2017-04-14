@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ProverbApi\proverb-api-core.csproj" />
+    <ProjectReference Include="..\..\src\ProverbApi\ProverbApi.csproj" />
   </ItemGroup>
 
 </Project>

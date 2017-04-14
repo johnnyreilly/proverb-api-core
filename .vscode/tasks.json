@@ -7,7 +7,7 @@
         {
             "taskName": "build",
             "args": [
-                "${workspaceRoot}\\src\\ProverbApi\\proverb-api-core.csproj"
+                "${workspaceRoot}\\src\\ProverbApi\\ProverbApi.csproj"
             ],
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"

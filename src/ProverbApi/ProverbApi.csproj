@@ -24,4 +24,8 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="1.0.0" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Proverb.Data.EntityFramework\Proverb.Data.EntityFramework.csproj" />
+  </ItemGroup>
 </Project>

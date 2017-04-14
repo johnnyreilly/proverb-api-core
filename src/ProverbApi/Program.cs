@@ -10,6 +10,7 @@ namespace Proverb.Api.Core
         {
             var host = new WebHostBuilder()
                 .UseKestrel()
+                // .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseContentRoot(System.IO.Path.Combine(Directory.GetCurrentDirectory(), "src/ProverbApi/"))
                 .UseIISIntegration()
                 .UseStartup<Startup>()

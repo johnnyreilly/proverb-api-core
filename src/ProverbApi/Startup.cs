@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using Proverb.Api.Core.EntityFramework;
+using Proverb.Data.EntityFramework;
 
 namespace Proverb.Api.Core
 {

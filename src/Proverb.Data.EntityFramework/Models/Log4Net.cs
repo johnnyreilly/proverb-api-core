@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Proverb.Api.Core.EntityFramework.Models
+namespace Proverb.Data.EntityFramework.Models
 {
     public partial class Log4Net
     {

@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Proverb.Api.Core.EntityFramework;
-using Proverb.Api.Core.EntityFramework.Models;
 using Proverb.Api.Core.Helpers;
+using Proverb.Data.EntityFramework;
+using Proverb.Data.EntityFramework.Models;
 
 namespace Proverb.Api.Core.Controllers
 {
