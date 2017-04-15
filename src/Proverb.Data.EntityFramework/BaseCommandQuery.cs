@@ -1,5 +1,4 @@
 ﻿using System;
-using Proverb.Data.EntityFramework;
 
 namespace Proverb.Data.EntityFramework.CommandQuery
 {

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Proverb.Data.EntityFramework;
 using Proverb.Data.EntityFramework.CommandQuery;
+using Proverb.Web.Helpers;
 
 namespace Proverb.Api.Core
 {
@@ -45,6 +46,8 @@ namespace Proverb.Api.Core
             services.AddScoped<ISayingCommand, SayingCommand>();
             services.AddScoped<IUserQuery, UserQuery>();
             services.AddScoped<IUserCommand, UserCommand>();
+
+            services.AddSingleton<IAppConfigHelper, AppConfigHelper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
