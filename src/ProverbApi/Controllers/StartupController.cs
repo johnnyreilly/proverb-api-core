@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Proverb.Api.Core.Helpers;
 using Proverb.Web.Helpers;
 using Proverb.Web.Models;
 
@@ -21,8 +22,8 @@ namespace Proverb.Api.Core.Controllers
 
         public IActionResult Get()
         {
-            var appRoot = Url.Content("~/");
-            var remoteServiceRoot = Url.Content("~/");
+            var appRoot = Url.AbsoluteContent("~/");
+            var remoteServiceRoot = Url.AbsoluteContent("~/");
 
             var startUpData = new StartUpData(
                 appName: _appConfigHelper.AppName,
