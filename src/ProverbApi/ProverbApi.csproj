@@ -2,6 +2,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <UserSecretsId>e8954b92-797f-478a-a4ea-9742a56a2a7e</UserSecretsId>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <VersionSuffix>*</VersionSuffix>
   </PropertyGroup>
 
   <ItemGroup>
