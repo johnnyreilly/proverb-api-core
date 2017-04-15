@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Proverb.Data.EntityFramework;
+using Proverb.Data.EntityFramework.CommandQuery;
 
 namespace Proverb.Api.Core
 {
@@ -37,6 +38,13 @@ namespace Proverb.Api.Core
             var connectionString = Configuration["SecretConnectionString"] ?? Configuration.GetConnectionString("ProverbConnection");
 
             services.AddDbContext<ProverbContext>(options => options.UseSqlServer(connectionString));
+
+            services.AddScoped<ISageCommand, SageCommand>();
+            services.AddScoped<ISageQuery, SageQuery>();
+            services.AddScoped<ISayingQuery, SayingQuery>();
+            services.AddScoped<ISayingCommand, SayingCommand>();
+            services.AddScoped<IUserQuery, UserQuery>();
+            services.AddScoped<IUserCommand, UserCommand>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

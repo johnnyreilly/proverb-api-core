@@ -3,6 +3,23 @@ using System.Linq;
 
 namespace Proverb.Api.Core.Helpers
 {
+    public class ValidationMessage 
+    {
+       public string Name { get; } 
+       public IEnumerable<string> Messages { get; }
+       public ValidationMessage(string name, IEnumerable<string> messages)
+       {
+           Name = name;
+           Messages = messages;
+       }
+
+       public ValidationMessage(string name, string message)
+       {
+           Name = name;
+           Messages = new [] { message };
+       } 
+    }
+
     public class ValidationMessages
     {
         private readonly Dictionary<string, IEnumerable<string>> _errors = new Dictionary<string, IEnumerable<string>>();
@@ -14,6 +31,11 @@ namespace Proverb.Api.Core.Helpers
         public ValidationMessages(Dictionary<string, IEnumerable<string>> errors)
         {
             _errors = errors;
+        }
+
+        public ValidationMessages(params ValidationMessage[] errors)
+        {
+            _errors = errors.ToDictionary(e => e.Name, value => value.Messages);
         }
 
         public void AddError(string field, string error)

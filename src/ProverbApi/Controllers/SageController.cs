@@ -1,8 +1,8 @@
-﻿using System.Linq;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Proverb.Api.Core.Helpers;
-using Proverb.Data.EntityFramework;
+using Proverb.Data.EntityFramework.CommandQuery;
 using Proverb.Data.EntityFramework.Models;
 
 namespace Proverb.Api.Core.Controllers
@@ -10,27 +10,31 @@ namespace Proverb.Api.Core.Controllers
     [Route("[controller]")]
     public class SageController : Controller
     {
-        ProverbContext _proverbContext;
-        ILogger<SageController> _logger;
-        public SageController(ProverbContext proverbContext, ILogger<SageController> logger)
+        readonly ISageCommand _sageCommand;
+        readonly ISageQuery _sageQuery;
+        readonly ILogger<SageController> _logger;
+        public SageController(ISageCommand sageCommand, ISageQuery sageService, ILogger<SageController> logger)
         {
-            _proverbContext = proverbContext;
+            _sageCommand = sageCommand;
+            _sageQuery = sageService;
             _logger = logger;
         }
 
         // GET sage
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            var sages = _proverbContext.User.Take(100).ToList();
+            var sages = await _sageQuery.GetAllAsync();
+
             return Ok(sages);
         }
 
         // GET sage/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            var sage = _proverbContext.User.Find(id);
+            var sage = await _sageQuery.GetByIdAsync(id);
+
             if (sage == null)
                 return NotFound("No sage with id " + id.ToString());
 
@@ -39,14 +43,14 @@ namespace Proverb.Api.Core.Controllers
 
         // POST api/values
         [HttpPost]
-        public IActionResult Post([FromBody]User sage)
+        public async Task<IActionResult> Post([FromBody]User sage)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState.ToValidationMessages());
             }
 
-            // await _sageService.UpdateAsync(sage);
+            await _sageCommand.UpdateAsync(sage);
 
             _logger.LogInformation("Sage " + sage.Name + " [id: " + sage.Id + "] updated by "/* + _userHelper.UserName*/);
 
@@ -62,9 +66,9 @@ namespace Proverb.Api.Core.Controllers
          */
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            // TODO: Delete
+            await _sageCommand.DeleteAsync(id);
 
             return Ok();
         }
