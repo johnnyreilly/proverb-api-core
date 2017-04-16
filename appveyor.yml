@@ -3,6 +3,7 @@ configuration: Release
 
 # scripts to run before build
 before_build:
+- ps: .\ModifyVersion.ps1 $env:APPVEYOR_BUILD_FOLDER\src\ProverbApi\ProverbApi.csproj $env:APPVEYOR_BUILD_NUMBER $env:APPVEYOR_BUILD_VERSION
 - cmd: dotnet restore src\ProverbApi\ProverbApi.csproj
 
 build_script:
