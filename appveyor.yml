@@ -14,15 +14,12 @@ artifacts:
 - path: dist
   name: WebApplication
 
-# deploy:
-# - provider: WebDeploy
-#   server: https://proverb-api.scm.azurewebsites.net:443/msdeploy.axd?site=proverb-api
-#   website: proverb-api
-#   username:
-#     secure: yLk3vuJTxvJamCmgbk1Zdg==
-#   password:
-#     secure: Kxngm8+WBGPrHffxfy5Ow/rMFy1ZpmyrzTg3iSnUcc7KmVh20PvwVC2erKGVacsOOCTcYCkno+3HME82bhvhPQ==
-#   remove_files: true
+## different deployment environments which can be uncommented to trigger a deployment
 
-deploy_script:
-- cmd: '"C:\Program Files (x86)\IIS\Microsoft Web Deploy V3\msdeploy.exe" -verb:sync -source:IisApp=''%appveyor_build_folder%\dist'' -dest:IisApp=''%website_name%'',ComputerName=''https://%website_name%.scm.azurewebsites.net/msdeploy.axd'',UserName=''$%website_name%'',Password=''%website_psw%'',IncludeAcls=''False'',AuthType=''Basic'' -enablerule:AppOffline -retryAttempts:2'
+## deploy proverb-api
+environment:
+  website_name: proverb-api
+  password:
+    secure: Kxngm8+WBGPrHffxfy5Ow/rMFy1ZpmyrzTg3iSnUcc7KmVh20PvwVC2erKGVacsOOCTcYCkno+3HME82bhvhPQ==
+
+- cmd: '"C:\Program Files (x86)\IIS\Microsoft Web Deploy V3\msdeploy.exe" -verb:sync -source:IisApp=''%appveyor_build_folder%\dist'' -dest:IisApp=''%website_name%'',ComputerName=''https://%website_name%.scm.azurewebsites.net/msdeploy.axd'',UserName=''$%website_name%'',Password=''%password%'',IncludeAcls=''False'',AuthType=''Basic'' -enablerule:AppOffline -retryAttempts:2'
