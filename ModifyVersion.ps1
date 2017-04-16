@@ -22,7 +22,6 @@ $version = "$version.$buildNum"
 $content = $regex.Replace($content, '${1}' + $version + '${4}')
 
 # update csproj file
-write-host $content
 [IO.File]::WriteAllText($projectFile, $content)
 
 # update AppVeyor build
