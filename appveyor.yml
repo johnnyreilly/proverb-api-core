@@ -24,4 +24,5 @@ artifacts:
 #     secure: Kxngm8+WBGPrHffxfy5Ow/rMFy1ZpmyrzTg3iSnUcc7KmVh20PvwVC2erKGVacsOOCTcYCkno+3HME82bhvhPQ==
 #   remove_files: true
 
+deploy:
 - cmd: '"C:\Program Files (x86)\IIS\Microsoft Web Deploy V3\msdeploy.exe" -verb:sync -source:IisApp=''%appveyor_build_folder%\dist'' -dest:IisApp=''%website_name%'',ComputerName=''https://%website_name%.scm.azurewebsites.net/msdeploy.axd'',UserName=''$%website_name%'',Password=''%website_psw%'',IncludeAcls=''False'',AuthType=''Basic'' -enablerule:AppOffline -retryAttempts:2'
