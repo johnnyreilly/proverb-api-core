@@ -9,7 +9,7 @@ before_build:
 build_script:
 - cmd: >-
     dotnet publish src\ProverbApi\ProverbApi.csproj --output %appveyor_build_folder%\dist
-  
+
 artifacts:
 - path: dist
   name: WebApplication
