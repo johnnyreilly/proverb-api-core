@@ -11,7 +11,10 @@ build_script:
     dotnet publish src\ProverbApi\ProverbApi.csproj --output %appveyor_build_folder%\dist
 
 test_script:
-  - cmd: dotnet test test\ProverbApi.Tests\ProverbApi.Tests.csproj
+  - cmd: >-
+    dotnet restore test\ProverbApi.Tests\ProverbApi.Tests.csproj
+
+    dotnet test test\ProverbApi.Tests\ProverbApi.Tests.csproj
 
 artifacts:
 - path: dist
