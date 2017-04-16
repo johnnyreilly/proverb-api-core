@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Proverb.Api.Core.Helpers;
 
-namespace ProverbApi.Tests.Helpers
+namespace Proverb.Web.Tests.Helpers
 {
     [TestClass]
     public class SaveHelpersTests

@@ -3,15 +3,15 @@ configuration: Release
 
 # scripts to run before build
 before_build:
-- ps: .\ModifyVersion.ps1 $env:APPVEYOR_BUILD_FOLDER\src\ProverbApi\ProverbApi.csproj $env:APPVEYOR_BUILD_NUMBER $env:APPVEYOR_BUILD_VERSION
-- cmd: dotnet restore src\ProverbApi\ProverbApi.csproj
+- ps: .\ModifyVersion.ps1 $env:APPVEYOR_BUILD_FOLDER\src\Proverb.Web\Proverb.Web.csproj $env:APPVEYOR_BUILD_NUMBER
+- cmd: dotnet restore src\Proverb.Web\Proverb.Web.csproj
 
 build_script:
-- cmd: dotnet publish src\ProverbApi\ProverbApi.csproj --output %appveyor_build_folder%\dist
+- cmd: dotnet publish src\Proverb.Web\Proverb.Web.csproj --output %appveyor_build_folder%\dist
 
 test_script:
-- cmd: dotnet restore test\ProverbApi.Tests\ProverbApi.Tests.csproj
-- cmd: dotnet test test\ProverbApi.Tests\ProverbApi.Tests.csproj
+- cmd: dotnet restore test\Proverb.Web.Tests\Proverb.Web.Tests.csproj
+- cmd: dotnet test test\Proverb.Web.Tests\Proverb.Web.Tests.csproj
 
 artifacts:
 - path: dist

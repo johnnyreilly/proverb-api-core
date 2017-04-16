@@ -6,9 +6,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}\\src\\ProverbApi\\bin\\Debug\\netcoreapp1.1\\ProverbApi.dll",
+            "program": "${workspaceRoot}\\src\\Proverb.Web\\bin\\Debug\\netcoreapp1.1\\Proverb.Web.dll",
             "args": [],
-            "cwd": "${workspaceRoot}\\src\\ProverbApi\\",
+            "cwd": "${workspaceRoot}\\src\\Proverb.Web\\",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
             "launchBrowser": {
@@ -29,7 +29,7 @@
                 "ASPNETCORE_ENVIRONMENT": "Development"
             },
             "sourceFileMap": {
-                "/Views": "${workspaceRoot}/src/ProverbApi/Views"
+                "/Views": "${workspaceRoot}/src/Proverb.Web/Views"
             }
         },
         {
