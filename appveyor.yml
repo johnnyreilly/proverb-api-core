@@ -1,0 +1,34 @@
+version: 1.0.{build}
+configuration: Release
+
+# scripts to run before build
+before_build:
+- cmd: >-
+    dotnet restore src\ProverbApi\ProverbApi.csproj
+
+#build:
+#  project: Proverb.sln
+#  publish_wap: true
+#  verbosity: minimal
+
+build_script:
+- cmd: >-
+    dotnet publish src\ProverbApi\ProverbApi.csproj --output artifacts\publish
+
+test:
+- cmd: dotnet test test\ProverbApi.tests\ProverbApi.tests.csproj
+
+artifacts:
+- path: artifacts\publish
+  name: WebApplication
+  type: WebDeployPackage
+
+deploy:
+- provider: WebDeploy
+  server: https://proverb-api.scm.azurewebsites.net:443/msdeploy.axd?site=proverb-api
+  website: proverb-api
+  username:
+    secure: yLk3vuJTxvJamCmgbk1Zdg==
+  password:
+    secure: Kxngm8+WBGPrHffxfy5Ow/rMFy1ZpmyrzTg3iSnUcc7KmVh20PvwVC2erKGVacsOOCTcYCkno+3HME82bhvhPQ==
+  remove_files: true
