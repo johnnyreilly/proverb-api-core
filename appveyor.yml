@@ -15,9 +15,6 @@ build_script:
 - cmd: >-
     dotnet publish src\ProverbApi\ProverbApi.csproj --output artifacts\publish
 
-test:
-- cmd: dotnet test test\ProverbApi.tests\ProverbApi.tests.csproj
-
 artifacts:
 - path: artifacts\publish
   name: WebApplication
