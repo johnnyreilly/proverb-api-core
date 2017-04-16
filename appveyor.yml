@@ -3,18 +3,14 @@ configuration: Release
 
 # scripts to run before build
 before_build:
-- cmd: >-
-    dotnet restore src\ProverbApi\ProverbApi.csproj
+- cmd: dotnet restore src\ProverbApi\ProverbApi.csproj
 
 build_script:
-- cmd: >-
-    dotnet publish src\ProverbApi\ProverbApi.csproj --output %appveyor_build_folder%\dist
+- cmd: dotnet publish src\ProverbApi\ProverbApi.csproj --output %appveyor_build_folder%\dist
 
 test_script:
-  - cmd: >-
-    dotnet restore test\ProverbApi.Tests\ProverbApi.Tests.csproj
-
-    dotnet test test\ProverbApi.Tests\ProverbApi.Tests.csproj
+- cmd: dotnet restore test\ProverbApi.Tests\ProverbApi.Tests.csproj
+- cmd: dotnet test test\ProverbApi.Tests\ProverbApi.Tests.csproj
 
 artifacts:
 - path: dist
