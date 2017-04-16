@@ -6,26 +6,25 @@ before_build:
 - cmd: >-
     dotnet restore src\ProverbApi\ProverbApi.csproj
 
-#build:
-#  project: Proverb.sln
-#  publish_wap: true
-#  verbosity: minimal
-
-build_script:
+build:
+  project: src\ProverbApi\ProverbApi.csproj
+  publish_wap: true
+  verbosity: quiet
+  
+after_build:
 - cmd: >-
-    dotnet publish src\ProverbApi\ProverbApi.csproj --output artifacts\publish
+    dotnet publish .\ --output %appveyor_build_folder%\dist
 
 artifacts:
-- path: artifacts\publish
+- path: dist
   name: WebApplication
-  type: WebDeployPackage
 
-deploy:
-- provider: WebDeploy
-  server: https://proverb-api.scm.azurewebsites.net:443/msdeploy.axd?site=proverb-api
-  website: proverb-api
-  username:
-    secure: yLk3vuJTxvJamCmgbk1Zdg==
-  password:
-    secure: Kxngm8+WBGPrHffxfy5Ow/rMFy1ZpmyrzTg3iSnUcc7KmVh20PvwVC2erKGVacsOOCTcYCkno+3HME82bhvhPQ==
-  remove_files: true
+# deploy:
+# - provider: WebDeploy
+#   server: https://proverb-api.scm.azurewebsites.net:443/msdeploy.axd?site=proverb-api
+#   website: proverb-api
+#   username:
+#     secure: yLk3vuJTxvJamCmgbk1Zdg==
+#   password:
+#     secure: Kxngm8+WBGPrHffxfy5Ow/rMFy1ZpmyrzTg3iSnUcc7KmVh20PvwVC2erKGVacsOOCTcYCkno+3HME82bhvhPQ==
+#   remove_files: true
