@@ -6,15 +6,10 @@ before_build:
 - cmd: >-
     dotnet restore src\ProverbApi\ProverbApi.csproj
 
-build:
-  project: src\ProverbApi\ProverbApi.csproj
-  publish_wap: true
-  verbosity: quiet
-  
-after_build:
+build_script:
 - cmd: >-
-    dotnet publish .\ --output %appveyor_build_folder%\dist
-
+    dotnet publish src\ProverbApi\ProverbApi.csproj --output %appveyor_build_folder%\dist
+  
 artifacts:
 - path: dist
   name: WebApplication
