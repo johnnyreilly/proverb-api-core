@@ -22,6 +22,7 @@ namespace Proverb.Api.Core.Helpers
 
     public class ValidationMessages
     {
+        public static ValidationMessages None { get; } = new ValidationMessages();
         private readonly Dictionary<string, IEnumerable<string>> _errors = new Dictionary<string, IEnumerable<string>>();
 
         public ValidationMessages() 
