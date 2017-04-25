@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Proverb.Api.Core.Helpers;
@@ -27,7 +28,7 @@ namespace Proverb.Api.Core.Controllers
         {
             var sages = await _sageQuery.GetAllAsync();
 
-            return Ok(sages);
+            return Ok(sages.Select(user => new Sage(user)));
         }
 
         // GET sage/5
@@ -39,7 +40,7 @@ namespace Proverb.Api.Core.Controllers
             if (sage == null)
                 return NotFound("No sage with id " + id.ToString());
 
-            return Ok(sage);
+            return Ok(new Sage(sage));
         }
 
         // POST api/values

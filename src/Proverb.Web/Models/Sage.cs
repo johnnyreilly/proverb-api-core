@@ -7,6 +7,19 @@ namespace Proverb.Web.Models
 {
     public class Sage
     {
+        public Sage() {
+
+        }
+
+        public Sage(User user) {
+            Id = user.Id;
+            Name = user.Name;
+            UserName = user.UserName;
+            Email = user.Email;
+            DateOfBirth = user.DateOfBirth;
+            Sagacity = user.Sagacity;
+        }
+
         public int Id { get; set; }
 
         [Required]
