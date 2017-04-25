@@ -48,8 +48,7 @@ namespace Proverb.Api.Core.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState.ToValidationMessages());
-                // return Ok(SaveResult.Fail(ModelState.ToValidationMessages()));
+                return Ok(SaveResult.Fail(ModelState.ToValidationMessages()));
             }
 
             var user = await _sageQuery.GetByIdAsync(sage.Id);
@@ -59,8 +58,7 @@ namespace Proverb.Api.Core.Controllers
 
             _logger.LogInformation("Sage " + sage.Name + " [id: " + sage.Id + "] updated by "/* + _userHelper.UserName*/);
 
-            return Ok();
-            // return Ok(SaveResult.Success(user.Id));
+            return Ok(SaveResult.Success(user.Id));
         }
 
         /*
