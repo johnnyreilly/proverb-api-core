@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Proverb.Api.Core.Helpers;
 using Proverb.Data.EntityFramework.CommandQuery;
 using Proverb.Data.EntityFramework.Models;
+using Proverb.Web.Models;
 
 namespace Proverb.Api.Core.Controllers
 {
@@ -43,14 +44,17 @@ namespace Proverb.Api.Core.Controllers
 
         // POST api/values
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]User sage)
+        public async Task<IActionResult> Post([FromBody]Sage sage)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState.ToValidationMessages());
             }
 
-            await _sageCommand.UpdateAsync(sage);
+            var user = await _sageQuery.GetByIdAsync(sage.Id);
+            sage.UpdateUser(user);
+
+            await _sageCommand.UpdateAsync(user);
 
             _logger.LogInformation("Sage " + sage.Name + " [id: " + sage.Id + "] updated by "/* + _userHelper.UserName*/);
 
