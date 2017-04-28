@@ -28,7 +28,7 @@ namespace Proverb.Api.Core.Controllers
         {
             var sages = await _sageQuery.GetAllAsync();
 
-            return Ok(sages.Select(user => new Sage(user)));
+            return Ok(sages.Select(user => new SageVM(user)));
         }
 
         // GET sage/5
@@ -40,12 +40,12 @@ namespace Proverb.Api.Core.Controllers
             if (sage == null)
                 return NotFound("No sage with id " + id.ToString());
 
-            return Ok(new Sage(sage));
+            return Ok(new SageVM(sage));
         }
 
         // POST api/values
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]Sage sage)
+        public async Task<IActionResult> Post([FromBody]SageVM sage)
         {
             if (!ModelState.IsValid)
             {

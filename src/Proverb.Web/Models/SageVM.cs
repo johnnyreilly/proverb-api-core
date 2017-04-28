@@ -5,13 +5,13 @@ using Proverb.Data.EntityFramework.Models;
 
 namespace Proverb.Web.Models
 {
-    public class Sage
+    public class SageVM
     {
-        public Sage() {
+        public SageVM() {
 
         }
 
-        public Sage(User user) {
+        public SageVM(User user) {
             Id = user.Id;
             Name = user.Name;
             UserName = user.UserName;

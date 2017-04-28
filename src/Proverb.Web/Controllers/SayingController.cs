@@ -1,9 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Proverb.Api.Core.Helpers;
 using Proverb.Data.EntityFramework.CommandQuery;
 using Proverb.Data.EntityFramework.Models;
+using Proverb.Web.Models;
 
 namespace Proverb.Api.Core.Controllers
 {
@@ -26,7 +28,7 @@ namespace Proverb.Api.Core.Controllers
         {
             var sayings = await _sayingQuery.GetAllAsync();
 
-            return Ok(sayings);
+            return Ok(sayings.Select(saying => new SayingVM(saying)));
         }
 
         // GET saying/5
@@ -38,11 +40,11 @@ namespace Proverb.Api.Core.Controllers
             if (saying == null)
                 return NotFound("No saying with id " + id.ToString());
 
-            return Ok(saying);
+            return Ok(new SayingVM(saying));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]Saying saying)
+        public async Task<IActionResult> Post([FromBody]SayingVM saying)
         {
             if (!ModelState.IsValid)
             {
@@ -63,11 +65,14 @@ namespace Proverb.Api.Core.Controllers
 
             if (saying.Id > 0)
             {
-                await _sayingCommand.UpdateAsync(saying);
-                return Ok();
+                var sayingToAdd = new Saying();
+                saying.UpdateSaying(sayingToAdd);
+                var addedId = await _sayingCommand.CreateAsync(sayingToAdd);
+                return Ok(addedId);
             }
 
-            var sayingId = await _sayingCommand.CreateAsync(saying);
+            var sayingToUpdate = await _sayingQuery.GetByIdAsync(saying.Id);
+            var sayingId = await _sayingCommand.CreateAsync(sayingToUpdate);
             return Ok(sayingId);
         }
 
