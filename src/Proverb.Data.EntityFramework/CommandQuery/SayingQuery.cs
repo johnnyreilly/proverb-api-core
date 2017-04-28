@@ -19,7 +19,9 @@ namespace Proverb.Data.EntityFramework.CommandQuery
 
         public async Task<ICollection<Saying>> GetAllAsync()
         {
-            var sayings = await DbContext.Saying.ToListAsync();
+            var sayings = await DbContext.Saying
+                .Include(saying => saying.Sage)
+                .ToListAsync();
 
             return sayings;
         }
