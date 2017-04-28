@@ -28,7 +28,9 @@ namespace Proverb.Data.EntityFramework.CommandQuery
 
         public async Task<Saying> GetByIdAsync(int id)
         {
-            var sayings = await DbContext.Saying.FindAsync(id);
+            var sayings = await DbContext.Saying
+                .Include(saying => saying.Sage)
+                .SingleAsync(saying => saying.Id == id);
 
             return sayings;
         }
