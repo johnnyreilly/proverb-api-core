@@ -65,14 +65,14 @@ namespace Proverb.Api.Core.Controllers
 
             if (saying.Id > 0)
             {
-                var sayingToAdd = new Saying();
-                saying.UpdateSaying(sayingToAdd);
-                var addedId = await _sayingCommand.CreateAsync(sayingToAdd);
-                return Ok(addedId);
+                var sayingToUpdate = await _sayingQuery.GetByIdAsync(saying.Id);
+                saying.UpdateSaying(sayingToUpdate);
+                await _sayingCommand.UpdateAsync(sayingToUpdate);
+                return Ok(saying.Id);
             }
 
-            var sayingToUpdate = await _sayingQuery.GetByIdAsync(saying.Id);
-            var sayingId = await _sayingCommand.CreateAsync(sayingToUpdate);
+            var sayingToAdd = new Saying();
+            var sayingId = await _sayingCommand.CreateAsync(sayingToAdd);
             return Ok(sayingId);
         }
 
