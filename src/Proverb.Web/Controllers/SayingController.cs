@@ -53,14 +53,14 @@ namespace Proverb.Api.Core.Controllers
 
             if (saying.SageId == 0)
             {
-                return BadRequest(
+                return Ok(SaveResult.Fail(
                     new ValidationMessages(
                         new ValidationMessage(
                             name: ValidationHelpers.GetFieldName(saying, x => x.SageId), // eg "saying.sageId"
                             message: "Please select a sage."
                         )
                     )
-                );
+                ));
             }
 
             if (saying.Id > 0)
@@ -68,12 +68,12 @@ namespace Proverb.Api.Core.Controllers
                 var sayingToUpdate = await _sayingQuery.GetByIdAsync(saying.Id);
                 saying.UpdateSaying(sayingToUpdate);
                 await _sayingCommand.UpdateAsync(sayingToUpdate);
-                return Ok(saying.Id);
+                return Ok(SaveResult.Success(saying.Id));
             }
 
             var sayingToAdd = new Saying();
             var sayingId = await _sayingCommand.CreateAsync(sayingToAdd);
-            return Ok(sayingId);
+            return Ok(SaveResult.Success(sayingId));
         }
 
         /*
